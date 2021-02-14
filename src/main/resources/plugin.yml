@@ -2,3 +2,13 @@ name: RinneTenseiCraft
 version: ${project.version}
 main: net.kunmc.lab.rinnetensei.RinneTenseiCraft
 api-version: 1.15
+
+commands:
+  rinnetensei:
+    usage: /rinnetensei <on/off>
+    description: RinneTensei Plugin
+    permission: rinnetensei
+
+permissions:
+  rinnetensei:
+    default: op
