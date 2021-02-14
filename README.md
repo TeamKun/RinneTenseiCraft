@@ -1,5 +1,8 @@
 # RinneTenseiCraft
-MOBが輪廻転生する。
+MOBが輪廻転生するプラグイン。
+
+Paper 1.15.2
+MC 1.15.2
 
 /rinnetensei on/off\
 onで起動 offで停止
