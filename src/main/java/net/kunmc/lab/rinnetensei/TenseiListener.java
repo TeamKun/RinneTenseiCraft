@@ -34,6 +34,7 @@ public class TenseiListener implements Listener {
         int num = random.nextInt(20);
         if(num == 0){
             loc.getWorld().spawnEntity(loc, EntityType.ILLUSIONER);
+            return;
         }
 
         // ヴェックスの場合
