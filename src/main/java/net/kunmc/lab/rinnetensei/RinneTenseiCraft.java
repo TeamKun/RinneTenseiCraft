@@ -24,11 +24,9 @@ public final class RinneTenseiCraft extends JavaPlugin {
                 put(EntityType.PARROT, EntityType.PHANTOM);
                 put(EntityType.PHANTOM, EntityType.GHAST);
                 put(EntityType.GHAST, EntityType.ENDER_DRAGON);
-                put(EntityType.ENDER_DRAGON, EntityType.CHICKEN);
 
                 put(EntityType.COW, EntityType.MUSHROOM_COW);
                 put(EntityType.MUSHROOM_COW, EntityType.RAVAGER);
-                put(EntityType.RAVAGER, EntityType.COW);
 
                 put(EntityType.SQUID, EntityType.PUFFERFISH);
                 put(EntityType.DOLPHIN, EntityType.PUFFERFISH);
@@ -39,7 +37,6 @@ public final class RinneTenseiCraft extends JavaPlugin {
                 put(EntityType.PUFFERFISH, EntityType.DROWNED);
                 put(EntityType.DROWNED, EntityType.GUARDIAN);
                 put(EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN);
-                put(EntityType.ELDER_GUARDIAN, EntityType.SQUID);
 
                 put(EntityType.PIG, EntityType.CREEPER);
                 put(EntityType.CREEPER, EntityType.ENDERMAN);
@@ -47,21 +44,20 @@ public final class RinneTenseiCraft extends JavaPlugin {
                 put(EntityType.HORSE, EntityType.SKELETON_HORSE);
                 put(EntityType.DONKEY, EntityType.SKELETON_HORSE);
                 put(EntityType.MULE, EntityType.SKELETON_HORSE);
-                put(EntityType.SKELETON_HORSE, EntityType.PIG);
+                put(EntityType.SKELETON_HORSE, EntityType.WITHER_SKELETON);
 
                 put(EntityType.SHEEP, EntityType.SKELETON);
                 put(EntityType.SKELETON, EntityType.WITHER_SKELETON);
                 put(EntityType.PIG_ZOMBIE, EntityType.WITHER_SKELETON);
                 put(EntityType.WITHER_SKELETON, EntityType.BLAZE);
                 put(EntityType.BLAZE, EntityType.WITHER);
-                put(EntityType.WITHER, EntityType.SHEEP);
 
                 put(EntityType.LLAMA, EntityType.SPIDER);
                 put(EntityType.PANDA, EntityType.SPIDER);
                 put(EntityType.POLAR_BEAR, EntityType.SPIDER);
                 put(EntityType.SPIDER, EntityType.CAVE_SPIDER);
+                put(EntityType.SNOWMAN, EntityType.IRON_GOLEM);
                 put(EntityType.CAVE_SPIDER, EntityType.IRON_GOLEM);
-                put(EntityType.IRON_GOLEM, EntityType.LLAMA);
 
                 put(EntityType.CAT, EntityType.SLIME);
                 put(EntityType.OCELOT, EntityType.SLIME);
@@ -72,19 +68,15 @@ public final class RinneTenseiCraft extends JavaPlugin {
 
                 put(EntityType.SILVERFISH, EntityType.ENDERMITE);
                 put(EntityType.ENDERMITE, EntityType.SHULKER);
-                put(EntityType.SHULKER, EntityType.SILVERFISH);
 
                 put(EntityType.STRAY, EntityType.HUSK);
-                put(EntityType.HUSK, EntityType.STRAY);
 
                 put(EntityType.WANDERING_TRADER, EntityType.PILLAGER);
                 put(EntityType.VILLAGER, EntityType.PILLAGER);
                 put(EntityType.PILLAGER, EntityType.VINDICATOR);
                 put(EntityType.VINDICATOR, EntityType.WITCH);
                 put(EntityType.WITCH, EntityType.EVOKER);
-                put(EntityType.EVOKER, EntityType.VILLAGER);
 
-                put(EntityType.ILLUSIONER, EntityType.VILLAGER);
             }
         };
         getServer().getPluginManager().registerEvents(new TenseiListener(), this);

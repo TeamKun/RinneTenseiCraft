@@ -50,11 +50,33 @@ public class TenseiListener implements Listener {
             }
             return;
         }
+        boolean isBurn = false;
+        EntityDamageEvent.DamageCause cause;
+        try{
+            cause = entity.getLastDamageCause().getCause();
+            isBurn = cause.equals(EntityDamageEvent.DamageCause.FIRE) ||
+                    cause.equals(EntityDamageEvent.DamageCause.FIRE_TICK);
+        }catch(Exception exce){
+
+        }
+
+        if(entityType.equals(EntityType.ZOMBIE)){
+            if(isBurn){
+                PigZombie zombiePig = (PigZombie) loc.getWorld().spawnEntity(loc, EntityType.PIG_ZOMBIE);
+                zombiePig.setAngry(true);
+                return;
+            }
+            if(cause.equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) ||
+                    cause.equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) ){
+                loc.getWorld().spawnEntity(loc, EntityType.SKELETON);
+                return;
+            }
+            loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
+        }
 
         // ブタの場合
         if(entityType.equals(EntityType.PIG)){
-            if(entity.getLastDamageCause().getCause().equals((EntityDamageEvent.DamageCause.FIRE)) ||
-                    entity.getLastDamageCause().getCause().equals((EntityDamageEvent.DamageCause.FIRE_TICK))){
+            if(isBurn){
                 PigZombie zombiePig = (PigZombie) loc.getWorld().spawnEntity(loc, EntityType.PIG_ZOMBIE);
                 zombiePig.setAngry(true);
                 return;
@@ -68,7 +90,10 @@ public class TenseiListener implements Listener {
                 horse.setTrap(true);
                 return;
             }
-            if(entity.getLastDamageCause().getCause().equals((EntityDamageEvent.DamageCause.ENTITY_EXPLOSION))){
+            if(cause.equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) ||
+                    cause.equals(EntityDamageEvent.DamageCause.FIRE) ||
+                    cause.equals(EntityDamageEvent.DamageCause.FIRE_TICK) ||
+                    cause.equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION)){
                Creeper creeper2 = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
                creeper2.setPowered(true);
                return;
@@ -81,10 +106,14 @@ public class TenseiListener implements Listener {
         if(evolveMap.get(entity.getType()).equals(EntityType.WITHER) ){
             Wither wither = (Wither) spawnEntity;
             wither.setHealth(100D);
+            return;
         }
         if(evolveMap.get(entity.getType()).equals(EntityType.ENDER_DRAGON) ){
             EnderDragon dragon = (EnderDragon) spawnEntity;
+            dragon.setAI(true);
+            dragon.setPhase(EnderDragon.Phase.CIRCLING);
             dragon.setHealth(100D);
+            return;
         }
     }
 
