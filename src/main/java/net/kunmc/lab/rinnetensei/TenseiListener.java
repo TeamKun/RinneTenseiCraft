@@ -105,8 +105,6 @@ public class TenseiListener implements Listener {
         try{
             spawnEntity = loc.getWorld().spawnEntity(loc, evolveMap.get(entity.getType()));
         }catch(NullPointerException nullPointerException){
-            Creeper creeper3 = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
-            creeper3.setPowered(true);
             return;
         }
 
@@ -126,7 +124,10 @@ public class TenseiListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event){
-        if(!isEnabled && event.getEntity().getType() != EntityType.CREEPER){
+        if(!isEnabled){
+            return;
+        }
+        if(!event.getEntity().getType().equals(EntityType.CREEPER)){
             return;
         }
         Entity entity = event.getEntity();
