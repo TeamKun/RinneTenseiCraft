@@ -51,12 +51,12 @@ public class TenseiListener implements Listener {
             return;
         }
         boolean isBurn = false;
-        EntityDamageEvent.DamageCause cause;
+        EntityDamageEvent.DamageCause cause = EntityDamageEvent.DamageCause.ENTITY_ATTACK;
         try{
             cause = entity.getLastDamageCause().getCause();
             isBurn = cause.equals(EntityDamageEvent.DamageCause.FIRE) ||
                     cause.equals(EntityDamageEvent.DamageCause.FIRE_TICK);
-        }catch(Exception exce){
+        }catch(Exception ignored){
 
         }
 
@@ -113,7 +113,6 @@ public class TenseiListener implements Listener {
             dragon.setAI(true);
             dragon.setPhase(EnderDragon.Phase.CIRCLING);
             dragon.setHealth(100D);
-            return;
         }
     }
 
@@ -123,10 +122,6 @@ public class TenseiListener implements Listener {
             return;
         }
         e.setCancelled(true);
-    }
-
-    public EntityType evolveEntity(EntityType entityType){
-        return EntityType.ZOMBIE;
     }
 
 }
