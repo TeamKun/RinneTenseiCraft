@@ -1,11 +1,13 @@
 package net.kunmc.lab.rinnetensei;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.SlimeSplitEvent;
 
 import java.util.HashMap;
@@ -99,8 +101,14 @@ public class TenseiListener implements Listener {
                return;
             }
         }
-
-        Entity spawnEntity = loc.getWorld().spawnEntity(loc, evolveMap.get(entity.getType()));
+        Entity spawnEntity;
+        try{
+            spawnEntity = loc.getWorld().spawnEntity(loc, evolveMap.get(entity.getType()));
+        }catch(NullPointerException nullPointerException){
+            Creeper creeper3 = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
+            creeper3.setPowered(true);
+            return;
+        }
 
         // ボスのヘルス調整
         if(evolveMap.get(entity.getType()).equals(EntityType.WITHER) ){
@@ -114,6 +122,17 @@ public class TenseiListener implements Listener {
             dragon.setPhase(EnderDragon.Phase.CIRCLING);
             dragon.setHealth(100D);
         }
+    }
+
+    @EventHandler
+    public void onEntityExplode(EntityExplodeEvent event){
+        if(!isEnabled && event.getEntity().getType() != EntityType.CREEPER){
+            return;
+        }
+        Entity entity = event.getEntity();
+        Location loc = entity.getLocation();
+        Creeper creeper = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
+        creeper.setPowered(true);
     }
 
     @EventHandler
